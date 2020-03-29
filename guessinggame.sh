@@ -1,10 +1,9 @@
 function user_InCheck {
- local cond=1 #Init cond as error value
- while [[ $cond -eq 1 ]]
+ while :
  do
   if [[ $response =~ ^[0-9]+$ ]]
   then
-   cond=0 #get out of while
+   break
   else
    echo "You have entered: $response is not a number. Please try to guess again"
    read response
@@ -13,7 +12,7 @@ function user_InCheck {
 }
 
 function guessinggame {
- secret_num=13
+ secret_num=$(ls -l |grep "^-"|wc -l)
  while [[ $response -ne $secret_num ]]
  do
 	if [[ $response -gt $secret_num ]]
